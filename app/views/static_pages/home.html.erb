@@ -1,0 +1,27 @@
+<div class="jumbotron">
+
+<div class="container-fluid">
+  <h1>个人相册应用</h1>
+  <p>新建相册，上传照片。想了解 <%= link_to "更多", about_path %></p>
+  <p>现在 <%= link_to "注册", new_user_registration_path %></p>
+</div>
+
+</div>
+
+<div class="container-fluid">
+  <div class="all-images">
+    <% @images.each do |image| %>
+    <div class="p-box">
+      <% image_info = get_image_info(image) %>
+      <% width = (130*image_info["width"]/image_info["height"]) %>
+      <div class="image">
+	<%= link_to image do %>
+	<%= image_tag qiniu_image_path(image.file.url, :thumbnail => 'x130>', :quality => 80), size: "#{width}x130" %>
+	<% end %>
+      </div>
+      <div><%= image.file_file_name %></div>
+    </div>
+    <% end %>
+  </div>
+
+</div>

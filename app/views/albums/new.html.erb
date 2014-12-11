@@ -1,0 +1,14 @@
+<h2>创建相册</h2>
+
+<div class="form-signin">
+  <%= form_for(@album) do |f| %>
+  <div class="field">
+    <%= f.label :name, "相册名称" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "确认", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

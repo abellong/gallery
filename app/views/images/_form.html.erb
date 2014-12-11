@@ -1,0 +1,27 @@
+<%= form_for(@image) do |f| %>
+  <% if @image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+
+      <ul>
+      <% @image.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <p>
+      <%= file_field_tag "images[]", type: :file, multiple: true %>
+    </p>
+    <!-- <p> -->
+    <!--   <%=  f.file_field :file %> -->
+    <!-- </p> -->
+    <p>
+      <% album_array = Album.all.map {|album| [album.name, album.id]} %>
+      <%= f.select :album_id, options_for_select(album_array, @album_id) %>
+    </p>
+    <%= f.submit %>
+  </div>
+<% end %>

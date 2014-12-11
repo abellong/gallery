@@ -1,0 +1,166 @@
+.navbar .dropdown-menu {
+    min-width: 100px;
+}
+
+.about {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+body {
+    padding-top: 40px;
+
+    .navbar {
+    	min-height:32px !important
+    }
+    .navbar-nav > li > a {
+	padding-top:5px !important;
+	padding-bottom:5px !important;
+    }
+
+    .navbar-brand {
+	padding: 5px 15px;
+	height: auto;
+    }
+    li.navbar-right {
+	float: right !important;
+    }
+
+    .navbar-inverse {
+	background-color: black;
+    }
+}
+h1 {
+    padding-bottom: 20px;
+}
+h2 {
+    text-align: center;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.form-signin {
+    max-width: 400px;
+    margin: 0 auto;
+
+    .field {
+	padding-top: 20px;
+    }
+    .actions {
+	padding-top: 30px;
+	padding-bottom: 20px;
+    }
+}
+
+/* 个人主页 所有相册部分 */
+.all-albums {
+    float: left;
+    .p-box {
+	box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	float: left;
+	padding: 14px 14px 19px;
+	margin: 0 17px 20px 0;
+	border-color: #F0F0F0 #E6E6E6 #D8D8D8;
+	border-style: solid;
+	border-width: 1px;
+	background: #fff url('http://r.ph.126.net/photo/image/album/bg_album_list.png?v=20111219') repeat-x 0 bottom;
+	.per-album {
+	    padding-bottom: 10px;
+	}
+    }
+}
+
+/* 单个album页面 */
+.all-images {
+    float: left;
+    .p-box {
+	border-color: #F0F0F0 #E6E6E6 #D8D8D8;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 20px 20px 0;
+	padding: 9px;
+	float: left;
+	.image {
+	    padding-bottom: 10px;
+	}
+    }
+}
+
+/* image 页面 */
+.mbox {
+    margin-top: 50px;
+    img {
+	display: block;
+	margin: 0 auto;
+	box-shadow: 5px 5px 5px #333;
+    }
+}
+
+body.image {
+    background: #444;
+    .navbar {
+    	min-height:32px !important
+    }
+
+    .navbar {
+	li {
+	    display: inline-block;
+	    padding: 5px 10px 5px 0px;
+	    a {
+		padding: 5px 5px;
+		color: #9d9d9d;
+		text-decoration: none;
+	    }
+	    a:hover {
+		color: white;
+	    }
+	}
+	margin-bottom: 0px;
+    }
+    ul {
+	padding-left: 0
+    }
+    .close {
+	z-index: 2031;
+	width: 32px;
+	height: 32px;
+	position: fixed;
+	top: 0px;
+	right: 2px;
+	background: url("http://r.ph.126.net/photo/image/album/icon-close.png?v=20120608") no-repeat -35px 5px #333;
+    }
+}
+
+.image-sidebar {
+    position: absolute;
+    width: 80px;
+    top: 120px;
+    right: 12.5%;
+    margin-right: -80px;
+    z-index: 2;
+    .image-list-box {
+	position: relative;
+	overflow: hidden;
+	height: 350px;
+	
+	.image-list {
+	    position: relative;
+	    overflow: visible;
+	    .image-item {
+		display: block;
+		margin-top: 6px;
+		width: 80px;
+		height: 80px;
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+	    }
+	}
+    }
+
+    .selected {
+	border: 2px solid #519cea;
+    }
+}

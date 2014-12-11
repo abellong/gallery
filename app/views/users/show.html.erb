@@ -1,0 +1,31 @@
+<div class="container-fluid">
+<% if current_user==@user %>
+<h1>我的相册</h1>
+<% else %>
+<h1><%= @user.name %>的相册</h1>
+<% end %>
+
+<div class="all-albums">
+  <% @albums.each do |album| %>
+  <div class="p-box">
+    <div class="per-album">
+      <% if album.images.blank? and album.cover.nil? %>
+        <%= link_to image_tag("http://r.ph.126.net/image/default/none160.gif"), album_path(album) %>
+      <% else %>
+        <% cover = album.cover || album.images.first %>
+        <%= link_to image_tag(qiniu_image_path(cover.file.url, thumbnail: '160x160^', crop: "!160x160a0a0", quality: 80), size: "160x160"), album_path(album)  %>
+      <% end %>
+      </a>
+    </div>
+    <div><%= album.name %></div>
+  </div>
+  <% end %>
+
+  <% if current_user == @user %>
+  <div>
+    <%= link_to "创建相册", new_album_path %>
+  </div>
+  <% end %>
+</div>
+
+</div>

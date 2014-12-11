@@ -1,0 +1,31 @@
+<h1>Listing images</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Size</th>
+    <th>Actions</th>
+  </tr>
+
+<% @images.each do |image| %>
+  <tr>
+    <td>
+      <%= link_to image do %>
+      <%= qiniu_image_tag image.file.url, :thumbnail => '100x100^', :quality => 80 %>
+      <% end %>
+    </td>
+    <td>
+      <%= image.file.image_size %>
+    </td>
+    <td>
+      <%= link_to 'Show', image %>
+      <%= link_to 'Edit', edit_image_path(image) %>
+      <%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Image', new_image_path %>
