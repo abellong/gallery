@@ -6,4 +6,4 @@ Paperclip::Attachment.default_options[:qiniu_credentials] = {
 Paperclip::Attachment.default_options[:bucket] = 'photos-longyb-info'
 Paperclip::Attachment.default_options[:use_timestamp] = false
 Paperclip::Attachment.default_options[:qiniu_host] =
-  'http://photos-longyb-info.qiniudn.com'
+  "http://#{ENV['BUCKET_NAME']}.qiniudn.com"
