@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
   belongs_to :album
 
-  has_attached_file :file, :path => ":class/:attachment/:id/:basename.:extension"
+  has_attached_file :file, :path => "#{ENV['URL_PREFIX']}:class/:attachment/:id/:basename.:extension"
   validates :file, :attachment_presence => true
   validates_attachment_content_type :file, :content_type => /\Aimage\/.*\Z/
 
