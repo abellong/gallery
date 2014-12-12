@@ -8,7 +8,7 @@
     <% width = (130*image_info["width"]/image_info["height"]) %>
     <div class="image">
       <%= link_to image do %>
-      <%= image_tag qiniu_image_path(image.file.url, :thumbnail => 'x130>', :quality => 80), size: "#{width}x130" %>
+      <%= image_tag get_image_url(image, :thumbnail => 'x130>', :quality => 80), size: "#{width}x130" %>
       <% end %>
     </div>
     <div><%= image.file_file_name %></div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211092030) do
+ActiveRecord::Schema.define(version: 20141212065322) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20141211092030) do
     t.integer  "width"
     t.integer  "height"
     t.integer  "serial_n"
+  end
+
+  create_table "thumbnails", force: true do |t|
+    t.integer  "image_id"
+    t.string   "url"
+    t.string   "params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

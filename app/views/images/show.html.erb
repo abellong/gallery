@@ -22,7 +22,7 @@
 <% end %>
 
 <div class="mbox" style="height: <%= height %>px">
-  <%= image_tag qiniu_image_path(@image.file.url, :thumbnail => '600x600', :quality => 80), size: "#{width}x#{height}" %>
+  <%= image_tag get_image_url(@image, :thumbnail => '600x600', :quality => 80), size: "#{width}x#{height}" %>
 </div>
 
 
@@ -37,7 +37,7 @@
           <% class_name = "image-item" %>
         <% end %>
         <%= link_to image_path(image), { :class => class_name, "data-index" => "#{image.serial_n}" } do %>
-          <%= image_tag(qiniu_image_path(image.file.url, thumbnail: '80x80^', crop: "!80x80a0a0", quality: 80), size: "80x80") %>
+          <%= image_tag(get_image_url(image, thumbnail: '80x80^', crop: "!80x80a0a0", quality: 80), size: "80x80") %>
         <% end %>
       <% end %>
     </div>
