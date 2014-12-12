@@ -33,8 +33,10 @@ class ImagesController < ApplicationController
 
   def create
     album = Album.find(params[:album])
-    @image = album.images.new(image_params)
-
+    image_p = image_params
+    image_p[:serial_n] = album.images.size
+    @image = album.images.new(image_p)
+    
     respond_to do |format|
       if @image.save
         format.html {
@@ -55,7 +57,14 @@ class ImagesController < ApplicationController
 
   def destroy
     @image = Image.find(params[:id])
+    serial_n = @image.serial_n
     @image.destroy
+    @image.album.images.each do |image|
+      n = image.serial_n
+      if n > serial_n
+        image.update_attribute(:serial_n, n - 1)
+      end
+    end
 
     respond_to do |format|
       format.html { redirect_to images_url }

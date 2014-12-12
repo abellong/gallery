@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.3'
 
 gem 'rails', '4.1.8'
 gem 'sqlite3'
@@ -18,6 +19,7 @@ gem "jquery-fileupload-rails"
 group :development do
   gem 'better_errors'
   gem "binding_of_caller"
+  gem 'net-ssh'
 end
 
 gem 'spring',        group: :development
@@ -28,5 +30,4 @@ gem 'paperclip-qiniu', :github => 'lidaobing/paperclip-qiniu'
 gem 'paperclip-meta'
 
 gem 'devise'
-
 gem 'mysql2'

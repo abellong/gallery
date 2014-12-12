@@ -88,6 +88,7 @@ GEM
     minitest (5.4.3)
     multi_json (1.10.1)
     mysql2 (0.3.17)
+    net-ssh (2.9.1)
     netrc (0.8.0)
     orm_adapter (0.5.0)
     paperclip (4.2.0)
@@ -176,6 +177,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   mysql2
+  net-ssh
   paperclip (~> 4.2)
   paperclip-meta
   paperclip-qiniu!
