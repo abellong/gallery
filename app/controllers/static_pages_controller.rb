@@ -7,8 +7,10 @@ class StaticPagesController < ApplicationController
     end
 
     @album = Album.first rescue nil?
-    @images = {}
     @images = @album.images rescue nil?
+    if @images.nil?
+          @images = {}
+    end
   end
 
   def about
