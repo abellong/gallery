@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212065322) do
+ActiveRecord::Schema.define(version: 20141213032555) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -36,10 +36,12 @@ ActiveRecord::Schema.define(version: 20141212065322) do
 
   create_table "thumbnails", force: true do |t|
     t.integer  "image_id"
-    t.string   "url"
+    t.string   "path"
     t.string   "params"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   create_table "users", force: true do |t|

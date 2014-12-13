@@ -14,15 +14,21 @@ module ImagesHelper
   def get_image_url(image, params={})
     thumbnail = image.thumbnails.find_by(params: params.to_s)
     if not thumbnail.nil?
-      return thumbnail.url
+      return "http://#{ENV['BUCKET_NAME']}.qiniudn.com/#{thumbnail.path}"
     else
       params_base64 = Base64.strict_encode64(params.to_s)
-      path = params_base64 + "-" + image.file.path
+      suffix = /(\.[A-Za-z]*)$/.match(image.file.path)
+      des_path = "thumbnail-" + image.file.path.sub(/(\.[A-Za-z]*)$/, 
+                                                    "-#{params_base64}#{suffix}")
       data = Qiniu::RS.get(ENV['BUCKET_NAME'], image.file.path)
-      result = Qiniu::RS.image_mogrify_save_as(ENV['BUCKET_NAME'], path, data["url"], params)
+      result = Qiniu::RS.image_mogrify_save_as(ENV['BUCKET_NAME'], des_path,
+                                               data["url"], params)
       if result
-        url = "http://#{ENV['BUCKET_NAME']}.qiniudn.com" + "/#{path}"
-        image.thumbnails.create(url: url, params: params.to_s)
+        url = "http://#{ENV['BUCKET_NAME']}.qiniudn.com/#{des_path}"
+        image_info = JSON.parse(Net::HTTP.get(URI.parse(URI.escape(url+"?imageInfo"))))
+        image.thumbnails.create(path: des_path, params: params.to_s,
+                                width: image_info["width"],
+                                height: image_info["height"])
         return url
       else
         return qiniu_image_path(image.file.url, params)

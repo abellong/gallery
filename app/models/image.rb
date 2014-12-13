@@ -1,6 +1,7 @@
 class Image < ActiveRecord::Base
   belongs_to :album
   has_many :thumbnails, dependent: :destroy
+#  after_save :add_thumbnails
 
   has_attached_file :file, :path => ":class/:attachment/:id/:basename.:extension"
   validates :file, :attachment_presence => true
@@ -17,5 +18,5 @@ class Image < ActiveRecord::Base
       "delete_type" => "DELETE" 
     }
   end
-
+  
 end

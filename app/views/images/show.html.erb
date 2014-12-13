@@ -15,14 +15,14 @@
 <% image_info = get_image_info(@image) %>
 <% if image_info["width"] > image_info["height"] %>
   <% width = 600 %>
-  <% height = width * image_info["height"] / image_info["width"] + 1 %>
+  <% height = width * image_info["height"] / image_info["width"] %>
 <% else %>
   <% height = 600 %>
-  <% width = height * image_info["width"] / image_info["height"] + 1 %>
+  <% width = height * image_info["width"] / image_info["height"] %>
 <% end %>
 
 <div class="mbox" style="height: <%= height %>px">
-  <%= image_tag get_image_url(@image, :thumbnail => '600x600', :quality => 80), size: "#{width}x#{height}" %>
+  <%= image_tag get_image_url(@image, thumbnail: '600x600', quality: 80), size: "#{width}x#{height}" %>
 </div>
 
 
