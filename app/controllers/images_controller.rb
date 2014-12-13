@@ -114,7 +114,7 @@ class ImagesController < ApplicationController
                                                    des_path, data["url"], params)
           if result
             url = "http://#{ENV['BUCKET_NAME']}.qiniudn.com" + "/#{des_path}?imageInfo"
-            image_info = JSON.parse(Net::HTTP.get(URI.parse(url)))
+            image_info = JSON.parse(Net::HTTP.get(URI.parse(URI.escape(url))))
             @image.thumbnails.create(path: des_path, params: params.to_s,
                                     width: image_info["width"],
                                     height: image_info["height"])
