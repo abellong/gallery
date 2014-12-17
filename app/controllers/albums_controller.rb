@@ -27,6 +27,9 @@ class AlbumsController < ApplicationController
   def admin
     @image = Image.new
     @album = Album.find(params[:id])
+    if @album.user != current_user
+      redirect_to root_path, notice: "无权管理该相册"
+    end
   end
 
   private

@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
   after_action :add_thumbnails, only: :create
   
   def index
@@ -35,6 +35,11 @@ class ImagesController < ApplicationController
 
   def create
     album = Album.find(params[:album])
+    if album.user != current_user
+      @image = nil
+      render json: {:error => "access failed"}.to_json, status: :access_failed
+      return
+    end
     image_p = image_params
     image_p[:serial_n] = album.images.size
     @image = album.images.new(image_p)
@@ -59,6 +64,10 @@ class ImagesController < ApplicationController
 
   def destroy
     @image = Image.find(params[:id])
+    if @image.album.user != current_user
+      render json: {error: "access_failed"}, status: :access_failed
+      return
+    end
     serial_n = @image.serial_n
     @image.destroy
     @image.album.images.each do |image|
@@ -89,8 +98,17 @@ class ImagesController < ApplicationController
       return json
     end
 
+    def access_control
+      if not user_signed_in?
+        authenticate_user!
+      else
+        
+      end
+    end
+
   protected
     def add_thumbnails
+      return if @image.nil?
       params_array = [
         { thumbnail: 'x130>', quality: 80 }, # album show
         { thumbnail: '160x160^', crop: "!160x160a0a0" }, # user show, cover
@@ -108,8 +126,6 @@ class ImagesController < ApplicationController
                                                         "-#{params_base64}#{suffix}")
           sleep 10
           data = Qiniu::RS.get(ENV['BUCKET_NAME'], @image.file.path)
-          Rails.logger.info "==============-#{@image.file.path}-============="
-          Rails.logger.info "==============-#{data.to_s}-============="
           result = Qiniu::RS.image_mogrify_save_as(ENV['BUCKET_NAME'], 
                                                    des_path, data["url"], params)
           if result

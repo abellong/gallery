@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/help'
   root to: 'static_pages#home'
-  resources :images
+  resources :images, only: [:index, :show, :create, :destroy]
   resources :users, only: [:show]
   resources :albums, only: [:new, :show, :create, :destroy]
 

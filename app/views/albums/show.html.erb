@@ -1,5 +1,9 @@
 <div class="container-fluid">
+<% if @album.user == current_user %>
 <h1><%= @album.name %>  <small>(<%= link_to '管理', album_admin_path(@album) %>)</small></h1>
+<% else %>
+<h1><%= @album.name %></h1>
+<% end %>
 
 <div class="all-images">
   <% @images.each do |image| %>
